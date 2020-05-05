@@ -1,0 +1,95 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width">
+  <link href="https://fonts.googleapis.com/css?family=Inconsolata:300" rel="stylesheet" type="text/css">
+  <meta name="author" content="Kecskeméti Zsolt - KeZso"/>
+  <title>Colour clock</title>
+  </head>
+  <body>
+   <style type="text/css">
+* {
+ margin: 0;
+ padding: 0;
+}
+html, body {
+  height: 100%;
+  background-color: gray;
+}
+#wrap {
+  font-family: Inconsolata, sans-serif;
+  font-size: 75px;
+  font-weight: bolder;
+  letter-spacing: 5px;
+  text-align: center;
+  position: relative;
+  top: 25%;
+  background-color: rgb(75,75,75);
+  padding: 5px;
+  width: 600px;
+  margin: 0 auto;
+  border: 5px solid;
+  border-radius: 25px;
+  box-shadow: 10px 10px 25px rgb(25,25,25);
+}
+p {
+  padding: 10px;
+}
+#container {
+  color: rgba(255,255,255,.5);
+  border: 3px solid black;
+  border-radius: 25px;
+  padding: 10px;
+  width: 400px;
+  margin: 0 auto; 
+}
+#date {
+  font-size: 50px;
+  padding: 10px;
+}
+   </style>
+</head>
+<body>
+  <div id="wrap">
+    <p>Colour clock</p>
+    <div id="container">
+      <div id="clock"></div>
+    </div>
+    <div id="date"></div>
+  </div>
+<script>
+function colorClock(){
+ var date = new Date();
+  var hours = date.getHours();
+  var minutes = date.getMinutes();
+  var seconds = date.getSeconds();
+  var year = date.getFullYear();
+  var month = date.getMonth() + 1;
+  var day = date.getDate();
+  if (hours <= 9) {
+    hours = "0" + hours;
+  }
+  if (minutes <= 9) {
+    minutes = "0" + minutes;
+  }
+  if (seconds <= 9) {
+    seconds = "0" + seconds;
+  }
+  var clockFace = hours + ':' + minutes + ':' + seconds;
+  var dateFace = year + '/' + month + '/' + day;
+  var hexColor = '#' + hours + minutes + seconds;
+  document.getElementById('clock').innerHTML = clockFace;
+  document.getElementById('date').innerHTML = dateFace;
+  document.getElementById('wrap').style.bordercolor = hexColor;
+  document.getElementById('wrap').style.color = hexColor;
+  document.getElementById('container').style.background = hexColor;
+  
+  setTimeout(function() {
+    colorClock();
+  }, 1000);
+}
+colorClock();
+</script>
+</body>
+</html>
